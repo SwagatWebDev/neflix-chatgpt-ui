@@ -1,8 +1,7 @@
-import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import Login from './Login'
-import Browse from './Browse'
-import Header from './Header'
+import React from 'react';
+import {RouterProvider, createBrowserRouter} from 'react-router-dom';
+import Login from './Login';
+import Browse from './Browse';
 
 const appRouter = createBrowserRouter([
     {
@@ -16,11 +15,11 @@ const appRouter = createBrowserRouter([
 ])
 
 const Body = () => {
-  return (
-    <div>
-      <RouterProvider router={appRouter}/>
-    </div>
-  )
+    return (
+        <div>
+            <RouterProvider router={appRouter}/>
+        </div>
+    )
 }
 
 export default Body;
