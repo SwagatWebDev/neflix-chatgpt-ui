@@ -1,11 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {HEADER_LOGO_URL, USER_LOGO_URL} from "../utils/constants";
-import {signOut} from "firebase/auth";
+import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../utils/firebase";
 import {useNavigate} from "react-router-dom";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCog, faQuestionCircle, faSignInAlt, faUser} from "@fortawesome/free-solid-svg-icons";
+import {addUser, removeUser} from "../utils/userSlice";
 
 export const Header = () => {
 
@@ -14,6 +15,27 @@ export const Header = () => {
     const navigate = useNavigate();
 
     const [showDropdown, setShowDropDown] = useState(false);
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const {uid, email, displayName, photoURL} = user;
+                dispatch(addUser({
+                    uid: uid,
+                    email: email,
+                    displayName: displayName,
+                    photoURL: photoURL
+                }));
+                navigate("/browse");
+            } else {
+                dispatch(removeUser());
+                navigate("/");
+            }
+        });
+        return () => unsubscribe();
+    }, []);
 
     const handleSignOut = () => {
         signOut(auth).then(() => {

@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import Header from "./Header";
-import {LOGIN_LOGO_URL} from "../utils/constants";
+import {LOGIN_LOGO_URL, USER_LOGO_URL} from "../utils/constants";
 import {checkValidLoginData} from "../utils/validate";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
@@ -44,7 +44,7 @@ export const Login = () => {
                     const user = userCredential.user;
                     console.log("Sign Up", user);
                     updateProfile(user, {
-                        displayName: fullName.current.value, photoURL: "https://avatars.githubusercontent.com/u/25737585?v=4"
+                        displayName: fullName.current.value, photoURL: USER_LOGO_URL
                     }).then(() => {
                         // Profile updated!
                         const {uid, email, displayName, photoURL} = auth.currentUser;
@@ -55,7 +55,6 @@ export const Login = () => {
                             displayName: displayName,
                             photoURL: photoURL
                         }));
-                        navigate("/browse");
                     }).catch((error) => {
                         // An error occurred
                         setErrorMessage(error.message);
@@ -72,7 +71,6 @@ export const Login = () => {
                 .then((userCredential) => {
                     const user = userCredential.user;
                     console.log("Sign In", user);
-                    navigate("/browse");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
