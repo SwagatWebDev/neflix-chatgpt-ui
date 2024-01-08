@@ -14,12 +14,12 @@ const Browse = () => {
             <MainContainer/>
             <SecondaryContainer/>
             {/*
-               Main Container
-                - VideoContainer
-                - VideoTitle
+                Main Container
+                - Video Container
+                - Video Title
                 Secondary Container
-                 - MovieList * n
-                   - Cards * n
+                - MovieList * n
+                  - Cards * n
             */}
         </div>
     )

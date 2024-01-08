@@ -1,6 +1,8 @@
-export const SecondaryContainer = () => {
+const SecondaryContainer = () => {
     return (
-        <div>SecondaryContainer</div>
+        <div>
+
+        </div>
     )
 }
 
