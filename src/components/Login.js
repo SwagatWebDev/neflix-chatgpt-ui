@@ -42,13 +42,11 @@ export const Login = () => {
                 .then((userCredential) => {
                     // Signed up
                     const user = userCredential.user;
-                    console.log("Sign Up", user);
                     updateProfile(user, {
                         displayName: fullName.current.value, photoURL: USER_LOGO_URL
                     }).then(() => {
                         // Profile updated!
                         const {uid, email, displayName, photoURL} = auth.currentUser;
-                        console.log(auth.currentUser);
                         dispatch(addUser({
                             uid: uid,
                             email: email,
@@ -70,7 +68,6 @@ export const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                 .then((userCredential) => {
                     const user = userCredential.user;
-                    console.log("Sign In", user);
                 })
                 .catch((error) => {
                     const errorCode = error.code;
