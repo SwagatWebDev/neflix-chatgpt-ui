@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {HEADER_LOGO_URL, USER_LOGO_URL} from "../utils/constants";
+import {HEADER_LOGO_URL} from "../utils/constants";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../utils/firebase";
 import {useNavigate} from "react-router-dom";
