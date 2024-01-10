@@ -91,10 +91,10 @@ export const Header = () => {
                     <ul>
                         <li
                             className="cursor-pointer text-white flex items-center whitespace-nowrap hover:underline"
-                            onClick={() => console.log("Manager Profiles called")}
+                            onClick={() => navigate("/manage-profile")}
                         >
                             <FontAwesomeIcon icon={faUser} className="mr-2"/>
-                            Manager Profiles
+                            Manage Profiles
                         </li>
                         <li className="cursor-pointer text-white flex items-center whitespace-nowrap hover:underline"
                             onClick={() => console.log("Account called")}
