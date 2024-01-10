@@ -10,6 +10,7 @@ const ManageProfile = () => {
     const [selectedCountry, setSelectedCountry] = useState(null);
     const [selectedCity, setSelectedCity] = useState(null);
     const [address, setAddress] = useState('');
+    const [image, setImage] = useState(null);
     const [errors, setErrors] = useState({});
 
 
@@ -82,6 +83,10 @@ const ManageProfile = () => {
             errors.city = 'Please select a city';
         }
 
+        if (!image) {
+            errors.image = 'Please select an Image';
+        }
+
         if (address.trim().length < 6) {
             errors.address = 'Address must be at least 6 characters long';
         }
@@ -91,28 +96,33 @@ const ManageProfile = () => {
         return Object.keys(errors).length === 0;
     }
 
-    const handleCountryChange = (selectedCountry) => {
-        setSelectedCountry(selectedCountry);
-        setSelectedCity(null);
-    }
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        setImage(file);
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         if (validateForm()) {
-            // add logic to handle form submission for your API
-            console.log('Form Submitted with Values:', {
+            console.log("Form Submitted with Values:", {
                 username,
                 gender,
                 user1,
                 user2,
                 selectedCountry,
                 selectedCity,
-                address
-            })
+                address,
+                image,
+            });
         } else {
-            console.log('Form has some errors. please check and fix')
+            console.log("Form has some errors. please check and fix");
         }
+    };
+
+    const handleCountryChange = (selectedCountry) => {
+        setSelectedCountry(selectedCountry);
+        setSelectedCity(null);
     }
 
     return (
@@ -224,6 +234,20 @@ const ManageProfile = () => {
                         styles={customStyles}
                     />
                     {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
+                </div>
+
+                {/* Image Upload Button */}
+                <div className="mb-4">
+                    <label className="block text-gray-700 text-sm font-bold mb-2">
+                        Upload Image:
+                    </label>
+                    <input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageChange}
+                        className= {`w-full border rounded-md px-3 py-2 ${errors.image ? 'border-red-500' : ''}`}
+                    />
+                    {errors.image && <p className="text-red-500 text-sm mt-1">{errors.image}</p>}
                 </div>
 
                 {/*Address Textbox */}
