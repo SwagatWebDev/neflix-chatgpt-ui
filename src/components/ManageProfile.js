@@ -48,6 +48,13 @@ const ManageProfile = () => {
         ]
     };
 
+    const customStyles = {
+        control: (styles) => ({
+            ...styles,
+            borderColor: errors.countries || errors.city ? '#e53e3e' : styles.borderColor,
+        }),
+    };
+
     const validateForm = () => {
         const errors = {};
 
@@ -76,7 +83,7 @@ const ManageProfile = () => {
         }
 
         if (address.trim().length < 6) {
-            errors.address = 'Address must be at least 4 characters long';
+            errors.address = 'Address must be at least 6 characters long';
         }
 
         setErrors(errors);
@@ -168,7 +175,7 @@ const ManageProfile = () => {
                         options={option1}
                         value={user1}
                         onChange={(user) => setUser1(user)}
-                        className={`${errors.option1 ? 'border-red-500' : ''}`}
+                        styles={customStyles}
                     />
                     {errors.option1 && <p className="text-red-500 text-sm mt-1">{errors.option1}</p>}
                 </div>
@@ -184,7 +191,7 @@ const ManageProfile = () => {
                         options={option2}
                         value={user2}
                         onChange={(user) => setUser2(user)}
-                        className={`${errors.option2 ? 'border-red-500' : ''}`}
+                        styles={customStyles}
                     />
                     {errors.option2 && <p className="text-red-500 text-sm mt-1">{errors.option2}</p>}
                 </div>
@@ -199,7 +206,7 @@ const ManageProfile = () => {
                         options={countries}
                         value={selectedCountry}
                         onChange={handleCountryChange}
-                        className={`${errors.countries ? 'border-red-500' : ''}`}
+                        styles={customStyles}
                     />
                     {errors.countries && <p className="text-red-500 text-sm mt-1">{errors.countries}</p>}
                 </div>
@@ -214,7 +221,7 @@ const ManageProfile = () => {
                         options={selectedCountry ? citiesByCountry[selectedCountry.value] : []}
                         value={selectedCity}
                         onChange={(selected) => setSelectedCity(selected)}
-                        className={`${errors.city ? 'border-red-500' : ''}`}
+                        styles={customStyles}
                     />
                     {errors.city && <p className="text-red-500 text-sm mt-1">{errors.city}</p>}
                 </div>
