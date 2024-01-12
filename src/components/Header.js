@@ -79,18 +79,18 @@ export const Header = () => {
                 src={HEADER_LOGO_URL}
                 alt="logo"
             />
-            <div className="flex relative p-4 ml-[60%]">
-                <select className="p-2 m-2 bg-gray-900 text-white"
+            <div className={`flex relative p-4 ${showGptSearch ? 'ml-[57%]' : 'ml-[64%]'}`}>
+                {showGptSearch && <select className="p-2 m-2 bg-gray-900 text-white"
                 onChange={handleLanguageChange}>
                     {SUPPORTED_LANGUAGE.map((lang) => (
                         <option key={lang.identifier} value={lang.identifier}>
                             {lang.name}
                         </option>
                     ))}
-                </select>
+                </select>}
                 <button className="bg-purple-800 text-white rounded-lg py-2 px-4 mx-4 my-2"
                 onClick={handleGptSearchClick}>
-                    {showGptSearch ? "Home Page": "GPT Search"}
+                    {showGptSearch ? "Home Page": "ChatGPT Search"}
                 </button>
                 <img
                     className="w-12 h-12"
