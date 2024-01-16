@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCog, faQuestionCircle, faSignInAlt, faUser} from "@fortawesome/free-solid-svg-icons";
 import {addUser, removeUser} from "../utils/userSlice";
-import {toggleGptSearchView} from "../utils/gptSlice";
+import {clearMovies, toggleGptSearchView} from "../utils/gptSlice";
 import {changeLanguage} from "../utils/configSlice";
 
 export const Header = () => {
@@ -64,10 +64,10 @@ export const Header = () => {
     }
 
     const handleGptSearchClick = () => {
-        dispatch(toggleGptSearchView());
+        showGptSearch ? dispatch(clearMovies) : dispatch(toggleGptSearchView());
     }
 
-    const handleLanguageChange = (e) => {
+    const handleLanguageChange =    (e) => {
         dispatch(changeLanguage(e.target.value))
     }
 
