@@ -6,11 +6,11 @@ import React from "react";
 const  GptSearch = () => {
     return (
         <>
-            <div className="absolute -z-10">
+            <div className="fixed -z-10">
                 <img
                     src={LOGIN_LOGO_URL}
                     alt="logo"
-                    className="object-cover w-full h-full"
+                    className="h-screen md:w-screen object-cover"
                 />
             </div>
             <div>
