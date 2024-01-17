@@ -13,7 +13,7 @@ const  GptMovieSuggestions= () => {
                     <MovieList
                         key={movieName}
                         title={movieName}
-                        movies={movieResults}
+                        movies={movieResults[index].results}
                     />
                 ))}
             </div>

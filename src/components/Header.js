@@ -64,10 +64,13 @@ export const Header = () => {
     }
 
     const handleGptSearchClick = () => {
-        showGptSearch ? dispatch(clearMovies) : dispatch(toggleGptSearchView());
+        if(!showGptSearch){
+            dispatch(clearMovies());
+        }
+        dispatch(toggleGptSearchView());
     }
 
-    const handleLanguageChange =    (e) => {
+    const handleLanguageChange = (e) => {
         dispatch(changeLanguage(e.target.value))
     }
 
