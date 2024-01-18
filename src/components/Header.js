@@ -107,15 +107,16 @@ export const Header = () => {
                     onMouseLeave={handleDropdownLeave}
                 >
                     {showDropdown ? (
-                        <span className="cursor-pointer mt-2 text-white" onClick={handleDropdownClick}>
+                        <span className="cursor-pointer mt-2 text-white" onMouseEnter={handleDropdownClick}>
                         &#9650;
                     </span>
                     ) : (
-                        <span className="cursor-pointer mt-2 text-white" onClick={handleDropdownClick}>
+                        <span className="cursor-pointer mt-2 text-white" onMouseLeave={handleDropdownClick}>
                         &#9660;
                     </span>
                     )}
-                    {showDropdown && (<div className="absolute right-0 mt-14 bg-black rounded shadow-lg p-6">
+                    {showDropdown && (
+                        <div className="absolute right-0 mt-14 bg-black rounded shadow-lg p-6">
                             <ul>
                                 <li
                                     className="cursor-pointer text-white flex items-center whitespace-nowrap hover:underline"
