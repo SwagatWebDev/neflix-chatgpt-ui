@@ -56,11 +56,11 @@ export const Header = () => {
     }
 
     const handleDropdownEnter = () => {
-        setShowDropDown(!showDropdown);
+        setShowDropDown(true);
     }
 
     const handleDropdownLeave = () => {
-        setShowDropDown(!showDropdown);
+        setShowDropDown(false);
     }
 
     const handleGptSearchClick = () => {
@@ -76,14 +76,15 @@ export const Header = () => {
 
     return (
         <div
-            className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
+            className="absolute w-screen px-8 py-2 md:mx-2 -my-4 md:my-6 -bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between">
             <img
-                className="w-44 mx-auto md:mx-0"
+                className="w-44 mx-auto md:mx-0 cursor-pointer"
                 src={HEADER_LOGO_URL}
                 alt="logo"
+                onClick={handleGptSearchClick}
             />
             { user && <div className="flex p-2 justify-between">
-                {showGptSearch && <select className="p-2 m-2 bg-gray-900 text-white"
+                {showGptSearch && <select className="p-2 m-2 bg-gray-900 text-white rounded-lg"
                                           onChange={handleLanguageChange}>
                     {SUPPORTED_LANGUAGES.map((lang) => (
                         <option key={lang.identifier} value={lang.identifier}>
@@ -96,7 +97,7 @@ export const Header = () => {
                     {showGptSearch ? "Home Page" : "ChatGPT Search"}
                 </button>
                 <img
-                    className="hidden md:block w-12 h-12"
+                    className="mx-2 w-12 h-12 rounded-lg cursor-pointer"
                     alt="userIcon"
                     src={user ? user.photoURL : IMG_CDN_URL}
                     onClick={handleDropdownClick}
@@ -107,7 +108,7 @@ export const Header = () => {
                     onMouseLeave={handleDropdownLeave}
                 >
                     {showDropdown ? (
-                        <span className="cursor-pointer mt-2 text-white" onMouseEnter={handleDropdownClick}>
+                        <span className="cursor-pointer mt-2 text-white"  onMouseEnter={handleDropdownClick}>
                         &#9650;
                     </span>
                     ) : (
