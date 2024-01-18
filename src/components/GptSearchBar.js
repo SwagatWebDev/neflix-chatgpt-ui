@@ -17,7 +17,6 @@ const GptSearchBar = () => {
     }
 
     const handleGPTSearchClick = async () => {
-        console.log(searchText.current.value);
 
         const gptQuery = "Act as a movie Recommendation system and suggest some movie for the query: "
         + searchText.current.value + ". Only give me the names of 5 movies, comma separated like example result given ahead. Example Result: Golmaal3, Sholay, Don, 3 Idiots, Gadar";
@@ -30,17 +29,12 @@ const GptSearchBar = () => {
         if(!gptResult) {
             // TODO: Write Error Handling case
         }
-        console.log(gptResult.choices?.[0]?.message?.content);
 
         const gptMovies = gptResult.choices?.[0]?.message?.content.split(',');
 
         const promiseArray = gptMovies.map((movie) => searchMoviesInTMDB(movie));
 
-        console.log(promiseArray);
-
         const tmdbResult = await Promise.all(promiseArray);
-
-        console.log(tmdbResult);
 
         dispatch(addGptMovieResult({movieNames: gptMovies, movieResults: tmdbResult}));
     }
