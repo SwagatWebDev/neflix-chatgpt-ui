@@ -1,5 +1,5 @@
 import Select from "react-select";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import {API_OPTION, LOGIN_LOGO_URL} from "../utils/constants";
 import axios from "axios";
 
@@ -14,6 +14,8 @@ const ManageProfile = () => {
     const [address, setAddress] = useState('');
     const [image, setImage] = useState(null);
     const [errors, setErrors] = useState({});
+    const [successMessage, setSuccessMessage] = useState("");
+    const fileInputRef = useRef(null);
     const managedUserURL = 'http://localhost:9005/api/v1/netflix-user';
 
 
@@ -140,6 +142,8 @@ const ManageProfile = () => {
 
         try {
             const response = await axios.post(managedUserURL, requestBody, API_OPTION);
+            handleSuccess(response);
+            resetForm();
             console.log(response.data);
         } catch (error) {
             console.error("Error occurred:", error);
@@ -169,6 +173,30 @@ const ManageProfile = () => {
         }
     };
 
+    const handleSuccess = (response) => {
+        setSuccessMessage("Successfully created/updated the user information");
+        setTimeout(() => {
+            setSuccessMessage(""); // Hide success message after 5 seconds
+        }, 5000);
+        console.log(response.data);
+    };
+
+    const resetForm = () => {
+        setUsername("");
+        setGender("");
+        setPrimaryUser([]);
+        setSecondaryUser([]);
+        setSelectedCountry(null);
+        setSelectedCity(null);
+        setAddress("");
+        setImage(null);
+        fileInputRef.current.value = "";
+    };
+
+    const closeBanner = () => {
+        setSuccessMessage(""); // Clear the success message to hide the banner
+    };
+
     const handleCountryChange = (selectedCountry) => {
         setSelectedCountry(selectedCountry);
         setSelectedCity(null);
@@ -179,6 +207,14 @@ const ManageProfile = () => {
              style={{backgroundImage: `url(${LOGIN_LOGO_URL})`}}>
             <div className="max-w-md mx-auto p-6 shadow-lg rounded-lg bg-black bg-opacity-50 text-white">
                 <h2 className="text-2xl font-bold mb-4">Manage Profile</h2>
+                {successMessage && (
+                    <div className="mb-4 p-3 bg-green-500 text-white text-center rounded-md relative">
+                        {successMessage}
+                        <button className="absolute top-0 right-0 m-1 p-1 text-white -mt-2" onClick={closeBanner}>
+                            &times;
+                        </button>
+                    </div>
+                )}
                 {/*Username Textbox */}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -295,6 +331,7 @@ const ManageProfile = () => {
                         <input
                             type="file"
                             accept="image/*"
+                            ref={fileInputRef}
                             onChange={handleImageChange}
                             className={`w-full border rounded-md px-3 py-2 ${errors.image ? 'border-red-500' : ''}`}
                         />
