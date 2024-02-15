@@ -2,6 +2,7 @@ import Login from "./Login";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import Browse from "./Browse";
 import ManageProfile from "./ManageProfile";
+import PlayMovie from "./PlayMovie";
 
 
 const appRouter = createBrowserRouter([
@@ -16,6 +17,14 @@ const appRouter = createBrowserRouter([
     {
         path: "/manage-profile",
         element: <ManageProfile/>,
+    },
+    {
+        path: "/play-movie",
+        element: <PlayMovie/>,
+    },
+    {
+        path: "/browse/play-movie",
+        element: <PlayMovie/>,
     },
 ]);
 export const Body = () => {
