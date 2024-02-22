@@ -16,7 +16,7 @@ const ManageProfile = () => {
     const [errors, setErrors] = useState({});
     const [successMessage, setSuccessMessage] = useState("");
     const fileInputRef = useRef(null);
-    const managedUserURL = 'netflix-user';
+    const managedUserURL = 'https://netflix-chatgpt-api.vercel.app/netflix-user';
 
 
     const option1 = [
@@ -141,7 +141,7 @@ const ManageProfile = () => {
         console.log(requestBody); // Check formData
 
         try {
-            const response = await axios.post(managedUserURL, requestBody, API_OPTION);
+            const response = await axios.post(managedUserURL, requestBody);
             handleSuccess(response);
             resetForm();
             console.log(response.data);
@@ -157,14 +157,14 @@ const ManageProfile = () => {
 
         if (validateForm()) {
             const userData = {
-                    username,
-                    gender,
-                    primaryUser,
-                    secondaryUser,
-                    selectedCountry,
-                    selectedCity,
-                    address,
-                    image,
+                username,
+                gender,
+                primaryUser,
+                secondaryUser,
+                selectedCountry,
+                selectedCity,
+                address,
+                image,
             }
             createNetflixUser(userData);
 
