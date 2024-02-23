@@ -157,14 +157,14 @@ const ManageProfile = () => {
 
         if (validateForm()) {
             const userData = {
-                username,
-                gender,
-                primaryUser,
-                secondaryUser,
-                selectedCountry,
-                selectedCity,
-                address,
-                image,
+                    username,
+                    gender,
+                    primaryUser,
+                    secondaryUser,
+                    selectedCountry,
+                    selectedCity,
+                    address,
+                    image,
             }
             createNetflixUser(userData);
 
